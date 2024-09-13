@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://192.168.178.6/doc/page/config.asp -->
+<html style="overflow: auto hidden; height: 100%; border: none; padding: 0px; margin: 0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+	<title>Configuration</title>
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	<meta http-equiv="Expires" content="0">
+	<meta name="format-detection" content="telephone=no">
+	<script>
+		document.write("<link type='text/css' href='../ui/css/ui.css?version=" + new Date().getTime() + "' rel='stylesheet' />");
+	</script><link type="text/css" href="index-Dateien/ui_002.css" rel="stylesheet"><link type="text/css" href="index-Dateien/ui.css" rel="stylesheet">
+<style type="text/css" id="operaUserStyle"></style><style type="text/css"></style></head>
+<body class="config min-width1280 ui-layout-container" id="config" style="overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; inset: 0px;"><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 5px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div><iframe src="index-Dateien/saved_resource.htm" frameborder="0" style="position: absolute; z-index: -1; left: 0px; top: 0px; border: 0px; width: 110px; height: 84px;"></iframe></div>
+	<div class="layout-north ui-layout-pane ui-layout-pane-north ng-scope" id="header" ng-controller="headerController" style="position: absolute; margin: 0px; inset: 0px 0px auto; width: auto; z-index: 0; height: 40px; display: block; visibility: visible;">
+		<!-- ngInclude: 'common/header.asp' --><div class="header ng-scope" ng-include="'common/header.asp'" onload="headerLoaded();"><div class="logo ng-scope"></div>
+<ul id="nav" class="nav ng-scope">
+	<li ng-show="!bInGuide" class=""><a ng-bind="oLan.preview" ng-click="jumpTo('preview')" class="ng-binding">Live View</a></li>
+	<li ng-show="bSupportPlayback &amp;&amp; !bNotPlugin &amp;&amp; !bInGuide" class="ng-hide"><a ng-bind="oLan.playback" ng-click="jumpTo('playback')" class="ng-binding">Playback</a></li>
+	<li ng-show="bSupportPicture &amp;&amp; !bNotPlugin &amp;&amp; !bInGuide" class="ng-hide"><a ng-bind="oLan.picture" ng-click="jumpTo('download')" class="ng-binding">Picture</a></li>
+	<li ng-show="bSupportApplication &amp;&amp; !bNotPlugin &amp;&amp; !bInGuide" class="ng-hide"><a ng-bind="oLan.application" ng-click="jumpTo('application')" class="ng-binding">Application</a></li>
+	<li ng-show="!bInGuide" class="active"><a ng-bind="oLan.config" ng-click="jumpTo('config')" class="ng-binding">Configuration</a></li>
+	<li ng-show="bSupportAlarmApplication &amp;&amp; !bInGuide" class="ng-hide"><a ng-bind="oLan.alarmApplication" ng-click="jumpTo('intelligentDisplayDispatch')" class="ng-binding">Smart Display</a></li>
+	<!--<li ng-show="bSupportPresentation"><a ng-bind="oLan.Display" ng-click="jumpTo('presentation')"></a></li>-->
+</ul>
+<div class="header-r ng-scope" ng-show="!bInGuide">
+    <div id="guideConfig" class="guide-config left ng-hide" ng-show="bSupportGuide">
+        <div ng-click="guide()">
+            <div class="icon"></div>
+            <label class="pointer ng-binding" ng-bind="szGuideName" style="">Configuration Wizard</label>
+        </div>
+        <div class="tips-div ng-hide" ng-show="bShowTips">
+            <div class="top-arraw"></div>
+            <div class="top-arraw-fill"></div>
+            <div class="span-wrapper">
+                <div class="content">
+                    <span ng-bind="oLan.guideTips" class="ng-binding" style="">Follow the wizard to quickly complete the configuration of complex functions. </span>
+                </div>
+                <div class="option">
+                    <span class="close ng-binding" ng-bind="oLan.know" ng-click="closeTips()">OK</span>
+                </div>
+            </div>
+        </div>
+        <iframe ng-show="bShowTips" class="iframe-tips-div ng-hide" scrolling="no" frameborder="0" src="index-Dateien/saved_resource1.htm"></iframe>
+    </div>
+
+    <div class="downloadLocal left" ng-click="download()" ng-show="bShowDownloadLocalService">
+		<div class="icon"></div>
+        <label class="pointer ng-binding" ng-bind="oLan.pluginDownload" style="">Download Plug-in</label>
+        <!--<span tooltips msg="{{oLan.localServiceDownloadTip}}" y="-25" side="5" time="10">
+
+		</span>-->
+	</div>
+	<div class="user">
+		<div class="icon"></div>
+		<label ng-bind="username" class="ng-binding" style="">admin</label>
+	</div>
+	<div class="help ng-hide" ng-show="bSupportHelp" ng-click="help()">
+		<div class="icon"></div>
+    	<label class="pointer ng-binding" ng-bind="oLan.help" style="">Help</label>
+	</div>
+	<div class="exit" ng-click="exit()">
+		<div class="icon"></div>
+        <label class="pointer ng-binding" ng-bind="oLan.logout" style="">Logout</label>
+	</div>
+</div>
+<div class="loginTimeoutImg ng-scope ng-hide" ng-hide="true"></div>
+<div id="no_plugin" ng-hide="true" class="ng-scope ng-hide"></div></div>
+	</div>
+	<div class="layout-west ui-layout-pane ui-layout-pane-west ng-scope" id="menu" ng-controller="menuController" style="position: absolute; margin: 0px; inset: 40px auto 0px 0px; height: 1048px; z-index: 0; width: 214px; display: block; visibility: visible;">
+		<!-- ngInclude: menuFile --><div class="sdmenu ng-scope" onselectstart="return false;" ng-include="menuFile"><div name="local" ng-show="!bNotPlugin" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon local-icon"></span><span ng-bind="oMenuLan.local" class="ng-binding" style="">Local</span></div>
+</div>
+<div name="system" class="ng-scope menu menu-1 collapsed">
+	<div class="menu-title menu-title-1 collapsed" style="padding-left: 21px;"><span class="menu-icon system-icon"></span><span ng-bind="oMenuLan.system" class="ng-binding" style="">System</span></div>
+	<div name="setting" class="menu menu-2 collapsed" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.systemSettings" class="ng-binding" style="">System Settings</span></div>
+	<div name="maintain" class="menu menu-2 collapsed" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.maintenance" class="ng-binding" style="">Maintenance</span></div>
+	<div name="security" ng-show="bSupportSecurity" class="menu menu-2 collapsed" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.security" class="ng-binding" style="">Security</span></div>
+	<div name="channelManage" ng-show="oCapbilities.bSupportDigital" class="menu menu-2 collapsed ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cameraManagement" class="ng-binding" style="">Camera Management</span></div>
+	<div name="user" class="menu menu-2 collapsed" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.userManagement" class="ng-binding" style="">User Management</span></div>
+</div>
+<div name="network" class="ng-scope menu menu-1">
+	<div class="menu-title menu-title-1 collapsed" style="padding-left: 21px;"><span class="menu-icon network-icon"></span><span ng-bind="oMenuLan.network" class="ng-binding" style="">Network</span></div>
+	<div name="basic" class="menu menu-2 collapsed" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.basicSettings" class="ng-binding">Basic Settings</span></div>
+	<div class="menu-wrap" style="padding-left: 3px; margin-left: 0px;"><div name="advanced" class="menu menu-2 collapsed menu-select" style="padding: 8px 0px 8px 39px;"><span ng-bind="oMenuLan.advancedSettings" class="ng-binding">Advanced Settings</span></div></div>
+</div>
+<div name="videoAudio" class="ng-scope menu menu-1 collapsed">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon video-icon"></span><span ng-bind="oMenuLan.videoOrAudio" class="ng-binding" style="">Video/Audio</span></div>
+</div>
+<div name="image" class="ng-scope menu menu-1 collapsed">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon image-icon"></span><span ng-bind="oMenuLan.image" class="ng-binding" style="">Image</span></div>
+</div>
+<div name="ptzCfg" ng-show="supportPTZ" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon ptz-icon"></span><span>PTZ</span></div>
+</div>
+<div name="event" class="ng-scope menu menu-1 collapsed">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon event-icon"></span><span ng-bind="oMenuLan.event" class="ng-binding" style="">Event</span></div>
+	<div name="event" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.basicEvent" class="ng-binding">Basic Event</span></div>
+	<div name="smart" ng-show="oCapbilities.bSupportSmart" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.smartEvent" class="ng-binding">Smart Event</span></div>
+	<div name="smartConfig" ng-show="oCapbilities.bSupportSmartConfig" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.smartEventConfig" class="ng-binding">Smart Event Parameter</span></div>
+</div>
+<div name="storage" ng-show="bSupportStorage" class="ng-scope menu menu-1 collapsed">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon storage-icon"></span><span ng-bind="oMenuLan.storage" class="ng-binding" style="">Storage</span></div>
+	<div name="plan" ng-show="bSupportStoragePlan" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.scheduleSettings" class="ng-binding">Schedule Settings</span></div>
+	<div name="storageManage" ng-show="bSupportStorageManage" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.storageManagement" class="ng-binding">Storage Management</span></div>
+	<div name="advanced" ng-show="bSupportStorageAdvanced" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advancedSettings" class="ng-binding">Advanced Settings</span></div>
+</div>
+
+<!-- 学生起立 -->
+<div name="studentsStoodUp" ng-show="bSupportStudentsStoodUp" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1 ellipsis" title="Student Standing Detection" style="padding-left: 21px;"><span class="menu-icon studentsStoodUp-icon"></span><span ng-bind="oMenuLan.studentsStoodUp" class="ng-binding" style="">Student Standing Detection</span></div>
+    <div name="basicConfiguration" ng-show="bSupportStudentsStoodUp" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.basicConfig" class="ng-binding">Basic Configuration</span></div>
+    <div name="algorithmicParams" ng-show="bSupportStudentsStoodUp" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.algorithmParam" class="ng-binding">Parameters</span></div>
+</div>
+
+<div name="vehicle" ng-show="bSupportVehicle" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon vehicle-icon"></span><span ng-bind="oMenuLan.roadDetect" class="ng-binding" style="">Road Traffic</span></div>
+</div>
+<!-- 轨迹联动 -->
+<div name="locusLinkage" ng-show="bSupportLocusLinkage" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon locusLinkage-icon"></span><span ng-bind="oMenuLan.locusLinkage" class="ng-binding" style="">Pattern Linkage</span></div>
+</div>
+<!-- 行为分析 -->
+<div name="behaviorAnalysis" ng-show="oVCACtrl.bShowBehavior" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div ng-click="initChannel('behavior', aBehaviorChannels[0])" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon intel-icon"></span><span ng-bind="oMenuLan.IntelliBehavior" class="ng-binding" style="">Behavior Analysis </span></div>
+    <div class="not-menu menu-channel" style="display: none;"><span channel="" analog="aBehaviorChannels" digital="[]" analog-num="aBehaviorChannels.length" channel-id="oChannelId.iChannlId" lan="oMenuLan" class="ng-isolate-scope"><select class="select ng-scope ng-pristine ng-valid" ng-model="szChannelId" ng-options="oChannel.value as oChannel.name for oChannel in aChannel" ng-disabled="1===aChannel.length"><option value="?" selected="selected"></option></select></span></div>
+    <div name="behaviorVideoPicOverlay" ng-show="bIntelliOverlay" ng-class="{'cannot-select': !bIntelliOverlay}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+    <div name="behaviorShield" ng-show="bBehaviorAnalysShield" ng-class="{'cannot-select': !bBehaviorAnalysShield}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.blockArea" class="ng-binding">Shield Region</span></div>
+    <div name="behaviorRuleConf" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="behaviorParams" ng-show="bIntelliAdvancedParam" ng-class="{'cannot-select': !bIntelliAdvancedParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;">
+        <span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span>
+    </div>
+</div>
+<div name="VCA" ng-show="oVCACtrl.bShowVCA" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div ng-click="getVCAChannel($event)" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon intel-icon"></span><span ng-bind="oMenuLan.VCA" class="ng-binding" style="">VCA</span></div>
+	<div class="not-menu menu-channel" style="display: none;"><span id="vcachannel" channel="" analog="oAnalogId" digital="oDigital" analog-num="iAnalogChannelNum" channel-id="oChannelId.iChannlId" lan="oMenuLan" class="ng-isolate-scope"><select class="select ng-scope ng-pristine ng-valid" ng-model="szChannelId" ng-options="oChannel.value as oChannel.name for oChannel in aChannel" ng-disabled="1===aChannel.length"><option value="?" selected="selected"></option></select></span></div>
+	<div name="VCAChannelSelect" ng-show="bSupportChannelProperty" ng-class="{'cannot-select': !bSupportChannelProperty}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.channelSelect" class="ng-binding">Camera Channel</span></div>
+    <div name="VCAResource" ng-show="bIntellResource" ng-class="{'cannot-select': !bIntellResource}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliResource" class="ng-binding">VCA Info</span></div>
+    <div name="VCAVideoPicOverlay" ng-show="bIntelliOverlay" ng-class="{'cannot-select': !bIntelliOverlay}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+    <div name="VCACalibration" ng-show="bIntelliCalibration" ng-class="{'cannot-select': !bIntelliCalibration}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cameraCabliion" class="ng-binding">Camera Calibration</span></div>
+    <div name="VCACountCalibration" ng-show="bSupportSetupCalibration" ng-class="{'cannot-select': !bSupportSetupCalibration}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cameraCabliion" class="ng-binding">Camera Calibration</span></div>
+    <div name="VCATrack" ng-show="bIntelliTrack" ng-class="{'cannot-select': !bIntelliTrack}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliTrack" class="ng-binding">Zooming Ratio</span></div>
+    <div name="VCAShield" ng-show="bIntelliShield" ng-class="{'cannot-select': !bIntelliShield}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.blockArea" class="ng-binding">Shield Region</span></div>
+    <div name="" ng-show="bIntelliMultiScene" ng-class="{'cannot-select': !bIntelliMultiScene}" class="menu menu-2 collapsed cannot-select ng-hide">
+    	<div class="menu-title menu-title-2" style="padding-left: 42px;"><span ng-bind="oMenuLan.sceneConf" class="ng-binding">Scene Configuration</span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[0].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[0].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[0].sceneName, 1)" class="ng-binding">Scene1</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[1].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[1].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[1].sceneName, 2)" class="ng-binding">Scene2</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[2].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[2].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[2].sceneName, 3)" class="ng-binding">Scene3</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[3].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[3].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[3].sceneName, 4)" class="ng-binding">Scene4</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[4].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[4].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[4].sceneName, 5)" class="ng-binding">Scene5</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[5].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[5].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[5].sceneName, 6)" class="ng-binding">Scene6</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[6].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[6].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[6].sceneName, 7)" class="ng-binding">Scene7</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[7].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[7].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[7].sceneName, 8)" class="ng-binding">Scene8</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[8].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[8].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[8].sceneName, 9)" class="ng-binding">Scene9</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div name="VCABehaviorRule" ng-mouseenter="mouseenter($event)" ng-mouseleave="mouseleave($event)" ng-show="sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[9].sceneEnable" ng-class="{'cannot-select': !sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[9].sceneEnable}" class="menu menu-3 cannot-select ng-hide" style="padding: 8px 0px 8px 63px;"><span ng-bind="getSceneName(sceneInfo['VCAINTELLISCENES'].arrSceneInfoList[9].sceneName, 10)" class="ng-binding">Scene10</span><span class="delete right displaynone" ng-click="deleteScene($event)"></span></div>
+    	<div class="cannot-select menu menu-3 ng-hide" ng-show="sceneInfo['VCAINTELLISCENES'].iCurSceneNum &lt; 10" ng-click="addScene($event)" style="padding: 8px 0px 8px 63px;"><span ng-bind="oMenuLan.addNewScene" class="ng-binding">New Scene</span></div>
+    </div>
+    <div name="VCAScenePatrol" ng-show="bIntelliPatrol" ng-class="{'cannot-select': !bIntelliPatrol}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cruiseParam" class="ng-binding">Scene Auto-switch</span></div>
+    <div name="VCABehaviorRuleConf" ng-show="bIntelliSingleScene" ng-class="{'cannot-select': !bIntelliSingleScene}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="VCAFaceCapture" ng-show="bIntelliFaceRule" ng-class="{'cannot-select': !bIntelliFaceRule}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="VCAMixDetection" ng-show="bSupportMixedTargetDetection" ng-class="{'cannot-select': !bSupportMixedTargetDetection}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="VCAFaceParam" ng-show="bIntelliFaceParam" ng-class="{'cannot-select': !bIntelliFaceParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.faceCapture" class="ng-binding">Face Capture</span></div>
+    <div name="VCAFaceContrast" ng-show="bFaceContrast" ng-class="{'cannot-select': !bFaceContrast}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.szFaceContrastConfig" class="ng-binding"></span></div>
+    <div name="VCAParams" ng-show="bIntelliAdvancedParam" ng-class="{'cannot-select': !bIntelliAdvancedParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;">
+    	<span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span>
+        <!--<div><span ng-bind="oMenuLan.advanceParam"></span></div>
+        <div name="VCAAdvanceParam"><span></span></div>
+        <div name="VCAGlobalFilter"><span ng-bind="oMenuLan.laGlobalSizeFilter" ng-show="sceneInfo['VCAGLOBALFILTER']"></span></div>-->
+    </div>
+    <div name="VCATeacherBehavior" ng-show="bSupportTeacherBehaviorDetect" ng-class="{'cannot-select': !bSupportTeacherBehaviorDetect}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.teacherBehaviorDetect" class="ng-binding">Teacher's Behavior Detection</span></div>
+</div>
+<div name="platform" ng-show="bSupportPlatform" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon platform-icon"></span><span ng-bind="oMenuLan.platformSettings" class="ng-binding" style="">Platform Settings</span></div>
+</div>
+<div name="peopleCount" ng-show="(bSupportPeopleCount.bSptObjCount || bSupportPeopleCount.bSptPeople) &amp;&amp; !bHeelPeopleCount" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon peopleCount-icon"></span><span ng-bind="{true:oMenuLan.peopleCount, false:oMenuLan.Counting}[bSupportPeopleCount.bSptPeople]" class="ng-binding" style="">Counting</span></div>
+</div>
+<div name="heelPeopleCount" ng-show="(bSupportPeopleCount.bSptObjCount || bSupportPeopleCount.bSptPeople) &amp;&amp; bHeelPeopleCount &amp;&amp; !bSupportFacePeopleCount" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon peopleCount-icon"></span><span ng-bind="{true:oMenuLan.peopleCount, false:oMenuLan.Counting}[bSupportPeopleCount.bSptPeople]" class="ng-binding" style="">Counting</span></div>
+</div>
+<div name="heatMapCfg" ng-show="bSupportHeatmapCfg" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon heatmap-icon"></span><span ng-bind="oMenuLan.heatMapCfg" class="ng-binding" style="">Heat Map Configuration</span></div>
+</div>
+<div name="wifiProbe" ng-show="bSupportWifiUpload" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon heatmap-icon"></span><span ng-bind="oMenuLan.featureGather" class="ng-binding" style="">Infomation Collection</span></div>
+</div>
+<!--<div name="traffic" ng-show="false">-->
+    <!--<div><span class="menu-icon intel-icon"></span><span ng-bind="oMenuLan.trafficEvent"></span></div>-->
+    <!--<div name="evidenceParam">-->
+        <!--<span ng-bind="oMenuLan.evidenceParam"></span>-->
+    <!--</div>-->
+    <!--<div name="">-->
+        <!--<div ng-click="getTrafficScenes($event)"><span ng-bind="oMenuLan.sceneConf"></span></div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>1</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>2</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>3</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>4</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>5</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>6</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>7</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>8</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>9</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>10</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>11</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>12</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>13</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>14</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>15</span>-->
+        <!--</div>-->
+        <!--<div name="trafficScenes">-->
+            <!--<span><label ng-bind="oMenuLan.SceneDefault"></label>16</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div name="trafficScenesPatrol">-->
+        <!--<span ng-bind="oMenuLan.cruiseParam"></span>-->
+    <!--</div>-->
+    <!--<div name="trafficVehicleStic" ng-show="bSupportTrafficVehicle">-->
+        <!--<span ng-bind="oMenuLan.vehicleCounting"></span>-->
+    <!--</div>-->
+    <!--<div name="customParam">-->
+        <!--<span ng-bind="oMenuLan.dataUpload"></span>-->
+    <!--</div>-->
+<!--</div>-->
+<div name="illegalParking" ng-show="bSupportIllegalParking" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon ptz-icon"></span><span ng-bind="oMenuLan.illegalParking" class="ng-binding" style="">Illegal Parking Detection</span></div>
+</div>
+<!--<div name="trafficIncident" ng-show="bSupportTraffic && !bSupportScene">-->
+    <!--<div><span class="menu-icon traffic-incident-icon"></span><span ng-bind="oMenuLan.trafficIncident"></span></div>-->
+<!--</div>-->
+<div name="personDensity" ng-show="bSupportPersonDensityDetection" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon person-density-icon"></span><span ng-bind="oMenuLan.personDensity" class="ng-binding" style="">People Density</span></div>
+</div>
+<div name="custom" ng-show="oCustom.bSupportCustomConfig" class="ng-scope menu menu-1 collapsed ng-hide">
+	<div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon local-icon"></span><span ng-bind="oCustom.szCustomName" class="ng-binding"></span></div>
+</div>
+<div name="ITS" class="menu-its ng-scope menu menu-1 collapsed ng-hide" ng-show="bSupportTraffic || bSupportVehicleMonitor">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;">
+        <span ng-show="bSupportTraffic" class="menu-icon ng-hide" ng-class="{true:'intel-icon', false: 'traffic-incident-icon'}[bSupportScene]"></span>
+        <span ng-show="bSupportVehicleMonitor" class="menu-icon vehicle-monitor-icon ng-hide"></span>
+        <span ng-bind="oMenuLan.szTraffic" class="ng-binding"></span>
+    </div>
+    <div name="cruiseManagement" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.generalConfig" class="ng-binding">Common Settings</span></div>
+    <div name="evidenceParam" ng-show="bSupportEvidenceParam" ng-class="{'cannot-select': !bSupportEvidenceParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span class="name ng-binding" ng-bind="oMenuLan.advanceParam">Advanced Configuration</span></div>
+    <div name="customParamSpecial" ng-show="bSpecialParam" class="menu menu-2 ng-hide" style="padding: 8px 0px 8px 42px;"><span class="name ng-binding" ng-bind="oMenuLan.specialParam">Advanced Parameter</span></div>
+</div>
+<!--<div ng-if="loaded() && false">-->
+<!--</div>-->
+<div name="webApp" ng-show="bSupportOpenPlatform &amp;&amp; bAgreeDeclare" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon webapp-icon"></span><span ng-bind="oMenuLan.openPlatForm" class="ng-binding" style="">Open Platform</span></div>
+    <div name="appConfig" class="menu menu-2" style="padding: 8px 0px 8px 42px;">
+        <span ng-bind="oMenuLan.application" class="ng-binding">Application</span>
+    </div>
+    <!-- ngRepeat: oMenu in aApplicationMenu -->
+</div>
+<div name="webApp" ng-show="bSupportOpenPlatform &amp;&amp; !bAgreeDeclare" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon webapp-icon"></span><span ng-bind="oMenuLan.openPlatForm" class="ng-binding" style="">Open Platform</span></div>
+</div>
+<div name="education" ng-show="bSupportEducation" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon intel-icon"></span><span ng-bind="oMenuLan.VCA" class="ng-binding" style="">VCA</span></div>
+    <div name="VCAVideoPicOverlay" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+    <div name="VCACountCalibration" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cameraCabliion" class="ng-binding">Camera Calibration</span></div>
+    <div name="VCAStudentsStoodUp" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.studentsStoodUp" class="ng-binding">Student Standing Detection</span></div>
+    <div name="VCAFramesPeopleCounting" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.framesPeopleCounting" class="ng-binding">Regional People Counting</span></div>
+    <div name="VCAAdvanceParam" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span></div>
+</div>
+<!-- 球机多场景人脸抓拍 -->
+<div name="faceCapture" ng-show="oVCACtrl.bShowFaceCapture" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div ng-click="initChannel('faceCapture', aFaceSnapChannels[0])" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon faceCapture-icon"></span><span ng-bind="oMenuLan.faceCapture" class="ng-binding" style="">Face Capture</span></div>
+    <!--叠加与抓图-->
+	<div name="faceCapturePicOverlay" ng-show="true" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+	<!--规则配置-->
+	<div name="faceCaptureParam" ng-show="true" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+	<!--高级配置-->
+	<div name="faceCaptureAlgorithm" ng-show="true" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span></div>
+</div>
+<!-- 单场景人脸抓拍, 原来智能分析中的人脸抓拍 -->
+<div name="face_capture" ng-show="oVCACtrl.bShowFaceSnap &amp;&amp; !bSupportFacePeopleCount" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div ng-click="initChannel('face_capture', aFaceSnapChannels[0])" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon faceCapture-icon"></span><span ng-bind="oMenuLan.faceCapture" class="ng-binding" style="">Face Capture</span></div>
+    <div class="not-menu menu-channel" style="display: none;"><span channel="" analog="aFaceSnapChannels" digital="[]" analog-num="aFaceSnapChannels.length" channel-id="oChannelId.iChannlId" lan="oMenuLan" class="ng-isolate-scope"><select class="select ng-scope ng-pristine ng-valid" ng-model="szChannelId" ng-options="oChannel.value as oChannel.name for oChannel in aChannel" ng-disabled="1===aChannel.length"><option value="?" selected="selected"></option></select></span></div>
+    <div name="fc_VideoPicOverlay" ng-show="bIntelliOverlay" ng-class="{'cannot-select': !bIntelliOverlay}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+    <div name="fc_Shield" ng-show="bIntelliShield" ng-class="{'cannot-select': !bIntelliShield}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.blockArea" class="ng-binding">Shield Region</span></div>
+    <div name="fc_FaceCapture" ng-show="bIntelliFaceRule" ng-class="{'cannot-select': !bIntelliFaceRule}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="fc_Params" ng-show="bIntelliAdvancedParam" ng-class="{'cannot-select': !bIntelliAdvancedParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span></div>
+</div>
+<!-- 单场景人脸客流 -->
+<div name="facePeopleCount" ng-show="bSupportFacePeopleCount" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon peopleCount-icon"></span><span ng-bind="oMenuLan.facePeopleCount" class="ng-binding" style="">Face Counting</span></div>
+    <div name="fp_VideoPicOverlay" ng-show="bIntelliOverlay" ng-class="{'cannot-select': !bIntelliOverlay}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+    <div name="fp_Shield" ng-show="bIntelliShield" ng-class="{'cannot-select': !bIntelliShield}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.blockArea" class="ng-binding">Shield Region</span></div>
+    <div name="fp_AlarmConfig" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.alarmConf" class="ng-binding">Alarm Setting</span></div>
+    <div name="fp_RuleConfig" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+    <div name="fp_AdvancedParam" class="menu menu-2" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span></div>
+</div>
+<!-- 混合目标检测 -->
+<div name="mixTargetDetection" ng-show="oVCACtrl.bShowMixedTarget" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div ng-click="initChannel('mixTargetDetection', aMixedTargetDetectionChannels[0])" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon mixTargetDetection-icon"></span><span ng-bind="oMenuLan.mixTargetDetection" class="ng-binding" style="">Multi-Target-Type Detection</span></div>
+    <div class="not-menu menu-channel" style="display: none;"><span channel="" analog="aMixedTargetDetectionChannels" digital="[]" analog-num="aMixedTargetDetectionChannels.length" channel-id="oChannelId.iChannlId" lan="oMenuLan" class="ng-isolate-scope"><select class="select ng-scope ng-pristine ng-valid" ng-model="szChannelId" ng-options="oChannel.value as oChannel.name for oChannel in aChannel" ng-disabled="1===aChannel.length"><option value="?" selected="selected"></option></select></span></div>
+   <div name="mt_VideoPicOverlay" ng-show="oMixedTargetCap.bSupportCapturePic" ng-class="{'cannot-select': !oMixedTargetCap.bSupportCapturePic}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.intelliInfo" class="ng-binding">Overlay &amp; Capture</span></div>
+   <div name="mt_Shield" ng-show="oMixedTargetCap.bSupportShield" ng-class="{'cannot-select': !oMixedTargetCap.bSupportShield}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.blockArea" class="ng-binding">Shield Region</span></div>
+   <div name="mt_MixDetection" ng-show="oMixedTargetCap.bSupport" ng-class="{'cannot-select': !oMixedTargetCap.bSupport}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.ruleConf" class="ng-binding">Rule</span></div>
+   <div name="mt_Params" ng-show="oMixedTargetCap.bSupportAdvancedParam" ng-class="{'cannot-select': !oMixedTargetCap.bSupportAdvancedParam}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.advanceParam" class="ng-binding">Advanced Configuration</span></div>
+   <div name="mt_Calibration" ng-show="oMixedTargetCap.bSupportManualCalib" ng-class="{'cannot-select': !oMixedTargetCap.bSupportManualCalib}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.cameraCabliion" class="ng-binding">Camera Calibration</span></div>
+</div>
+<!-- 比对&建模 -->
+<div name="contrast_model" ng-show="oVCACtrl.bShowContrastModel &amp;&amp; !bSupportFacePeopleCount" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div ng-click="initChannel('contrast_model', aContrastModelChannels[0])" class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon contrast-model-icon"></span><span ng-bind="oMenuLan.contrastModel" class="ng-binding" style="">Comparison and Modeling</span></div>
+    <div class="not-menu menu-channel" style="display: none;"><span channel="" analog="aContrastModelChannels" digital="[]" analog-num="aContrastModelChannels.length" channel-id="oChannelId.iChannlId" lan="oMenuLan" class="ng-isolate-scope"><select class="select ng-scope ng-pristine ng-valid" ng-model="szChannelId" ng-options="oChannel.value as oChannel.name for oChannel in aChannel" ng-disabled="1===aChannel.length"><option value="?" selected="selected"></option></select></span></div>
+    <div name="cm_contrastModel" ng-show="bFaceContrast" ng-class="{'cannot-select': !bFaceContrast}" class="menu menu-2 cannot-select ng-hide" style="padding: 8px 0px 8px 42px;"><span ng-bind="oMenuLan.faceContrastModel" class="ng-binding">Face Comparison and Modeling</span></div>
+</div>
+<!---->
+<div name="faceAttendance" ng-show="bSupportFaceAttendance" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon faceCapture-icon"></span><span ng-bind="oMenuLan.faceAttendance" class="ng-binding" style="">Face Attendance</span></div>
+</div>
+<div name="faceSnapLib" ng-show="bSupportFaceContrast" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon facelib-icon"></span><span ng-bind="oMenuLan.faceLibrary" class="ng-binding" style="">Face Picture Library</span></div>
+</div>
+<div name="queueDetection" ng-show="bSupportQueueDetection" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon queue-detection-icon"></span><span ng-bind="oMenuLan.queueDetection" class="ng-binding" style="">Queue Management</span></div>
+</div>
+<div name="cityManagement" ng-show="bSupportCityManagement" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon citymanagement-icon"></span><span ng-bind="oMenuLan.cityManagement" class="ng-binding" style="">City Management</span></div>
+</div>
+<div name="floorDisplay" ng-show="bSupportFloorDisplay" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon floordisplay-icon"></span><span ng-bind="oMenuLan.floorDisplay" class="ng-binding" style="">Floor Display</span></div>
+</div>
+<!-- AI 开放平台 -->
+<div name="AIOpenPlatform" ng-show="oAIPlatform.bSupport" class="ng-scope menu menu-1 collapsed ng-hide">
+    <div class="menu-title menu-title-1" style="padding-left: 21px;"><span class="menu-icon aIOpenPlatform-icon"></span><span ng-bind="oMenuLan.aiPlatform" class="ng-binding"></span></div>
+</div>
+<div ng-hide="true" ng-init="aApplicationMenu.length === 0 &amp;&amp; menuLoaded()" class="ng-scope menu menu-1 collapsed ng-hide"></div></div>
+	</div>
+	<div class="layout-center ui-layout-pane ui-layout-pane-center ui-layout-container ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="position: absolute; margin: 0px; inset: 40px 0px 0px 214px; height: 1048px; width: 1440px; z-index: 0; display: block; visibility: visible; overflow: hidden;">
+		<div class="layout-center-inner ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="position: absolute; margin: 0px; inset: 0px 0px 30px; height: 1018px; width: 1440px; z-index: 0; display: block; visibility: visible;">
+			<div id="view" class="view"><div id="tabs" class="network tabs-1 ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul id="advanced" ng-controller="advancedController" class="ng-scope ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+        <!-- ngIf: oAdvancedCap.bSupportSnmp -->
+        <!-- ngIf: oAdvancedCap.bSupportFtp -->
+        <!-- ngIf: oAdvancedCap.bSupportEmail -->
+        <!-- ngIf: oAdvancedCap.bSupportPlatform --><li ng-if="oAdvancedCap.bSupportPlatform" module="advancedPlatform" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-19" aria-labelledby="ui-id-19" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedPlatform.asp" hidefocus="" ng-bind="oLan.platformAccess" class="ng-binding ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-19" style="">Platform Access</a></li><!-- end ngIf: oAdvancedCap.bSupportPlatform -->
+        <!-- ngIf: oAdvancedCap.bSupportHttps --><li ng-if="oAdvancedCap.bSupportHttps" module="advancedHttps" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-20" aria-labelledby="ui-id-20" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedHttps.asp" hidefocus="" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-20">HTTPS</a></li><!-- end ngIf: oAdvancedCap.bSupportHttps -->
+        <!-- ngIf: oAdvancedCap.bSupportQos --><li ng-if="oAdvancedCap.bSupportQos" module="advancedQos" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-21" aria-labelledby="ui-id-21" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedQos.asp" hidefocus="" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-21">QoS</a></li><!-- end ngIf: oAdvancedCap.bSupportQos -->
+        <!-- ngIf: oAdvancedCap.bSupport8021x -->
+        <!-- ngIf: oAdvancedCap.bSupportWifi --><li ng-if="oAdvancedCap.bSupportWifi" module="advancedWifi" class="ng-scope ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="ui-tabs-22" aria-labelledby="ui-id-22" aria-selected="true"><a href="http://192.168.178.6/doc/page/config/network/advancedWifi.asp" hidefocus="" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-22">Wi-Fi</a></li><!-- end ngIf: oAdvancedCap.bSupportWifi -->
+        <!-- ngIf: oAdvancedCap.bSupport28181Service -->
+        <!-- ngIf: oAdvancedCap.bSupportWLANAP --><li ng-if="oAdvancedCap.bSupportWLANAP" module="advancedWLANAP" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-23" aria-labelledby="ui-id-23" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedWLANAP.asp" hidefocus="" ng-bind="oLan.wlanap" class="ng-binding ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-23" style="">WLAN AP</a></li><!-- end ngIf: oAdvancedCap.bSupportWLANAP -->
+        <!-- ngIf: oAdvancedCap.bSupportRTMP -->
+        <!-- ngIf: oAdvancedCap.bSupportNetworkOther -->
+        <!-- ngIf: oAdvancedCap.bSupportProtocolConfig --><li ng-if="oAdvancedCap.bSupportProtocolConfig" module="advancedProtocolConfig" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-24" aria-labelledby="ui-id-24" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedProtocolConfig.asp" hidefocus="" ng-bind="oLan.integrationProtocol" class="ng-binding ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-24" style="">Integration Protocol</a></li><!-- end ngIf: oAdvancedCap.bSupportProtocolConfig -->
+        <!-- ngIf: oAdvancedCap.bSupportViewLibrary -->
+        <!-- ngIf: oCustom.bSupportCustom -->
+        <!-- ngIf: oAdvancedCap.bSupportAdvancedService --><li ng-if="oAdvancedCap.bSupportAdvancedService" module="advancedService" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-25" aria-labelledby="ui-id-25" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/advancedService.asp" hidefocus="" ng-bind="oLan.networkService" class="ng-binding ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-25" style="">Network Service</a></li><!-- end ngIf: oAdvancedCap.bSupportAdvancedService -->
+        <!-- ngIf: oAdvancedCap.bSupportNpq -->
+		<!-- ngIf: oAdvancedCap.bSupporthttpListen --><li ng-if="oAdvancedCap.bSupporthttpListen" module="httpListen" class="ng-scope ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="ui-tabs-26" aria-labelledby="ui-id-26" aria-selected="false"><a href="http://192.168.178.6/doc/page/config/network/httpListen.asp" hidefocus="" ng-bind="oLan.httpListen" class="ng-binding ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-26" style="">HTTP Listening</a></li><!-- end ngIf: oAdvancedCap.bSupporthttpListen -->
+		<!-- ngIf: oAdvancedCap.bSupportTCPAcceleration -->
+		<!-- ngIf: oAdvancedCap.bSupportFlowControl -->
+		<!-- ngIf: oAdvancedCap.bSupportAlertStreamServer -->
+	</ul><div id="ui-tabs-19" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-19" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-20" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-20" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-21" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-21" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-22" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-22" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;"><div id="advancedWifi" ng-controller="advancedWifiController" class="ng-scope">
+    <div class="items">
+        <div class="item" ng-show="oCapbilities.bSupportWifiEnable">
+            <span class="first">
+                <input ng-model="oWifiParams.bEnableWifi" type="checkbox" class="checkbox ng-pristine ng-valid" style="">
+                <label ng-bind="oLan.enable" class="ng-binding" style="">Enable</label>
+            </span>
+            <span ng-show="oCapbilities.bSupportMutexWithWirelessServer &amp;&amp; oWifiParams.bEnableWifi" class="desc ng-binding" ng-bind="oLan.mutexWithWirelessServer">The Wlan Hotspot will be disabled after the Wi-Fi being enabled.</span>           
+        </div>
+        <div class="item title grid855">
+            <span class="first ng-binding" ng-bind="oLan.wifiList">Wireless List</span>
+            <span class="grid-title-right">
+                <input type="button" class="btn" ng-value="oLan.search" ng-click="search(1)" value="Search">
+            </span>
+        </div>
+        <div id="tableWifiList" class="grid855 grid-height"><div class="table"><div class="table-header"><span class="table-cell" title="No." style="width: 50px;">No.</span><span class="table-cell" title="SSID" style="width: 150px;">SSID</span><span class="table-cell" title="Working Mode" style="width: 100px;">Working Mode</span><span class="table-cell" title="Security Mode" style="width: 125px;">Security Mode</span><span class="table-cell" title="Channel" style="width: 100px;">Channel</span><span class="table-cell" title="Signal Strength" style="width: 100px;">Signal Strength</span><span class="table-cell" title="Speed(Mbps)" style="width: 100px;">Speed(Mbps)</span><span class="table-cell" title="Connection Status" style="width: 100px;">Connection Status</span></div><div class="table-body" style="height: 369px;"><div class="table-row table-first table-even"><span class="table-cell" title="1" style="width: 50px;"><pre>1</pre></span><span class="table-cell" title="ladeuxiemerueagauchetoutdroit" style="width: 150px;"><pre>ladeuxiemerueagauchetoutdroit</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="11" style="width: 100px;"><pre>11</pre></span><span class="table-cell" title="32" style="width: 100px;"><pre>32</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Connected" style="width: 100px;"><pre>Connected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="2" style="width: 50px;"><pre>2</pre></span><span class="table-cell" title="Vodafone Homespot" style="width: 150px;"><pre>Vodafone Homespot</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="not-encrypted" style="width: 125px;"><pre>not-encrypted</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="26" style="width: 100px;"><pre>26</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="3" style="width: 50px;"><pre>3</pre></span><span class="table-cell" title="Vodafone-1E36" style="width: 150px;"><pre>Vodafone-1E36</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="26" style="width: 100px;"><pre>26</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="4" style="width: 50px;"><pre>4</pre></span><span class="table-cell" title="Vodafone Hotspot" style="width: 150px;"><pre>Vodafone Hotspot</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="not-encrypted" style="width: 125px;"><pre>not-encrypted</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="26" style="width: 100px;"><pre>26</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="5" style="width: 50px;"><pre>5</pre></span><span class="table-cell" title="Lord Voldemodem" style="width: 150px;"><pre>Lord Voldemodem</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="11" style="width: 100px;"><pre>11</pre></span><span class="table-cell" title="26" style="width: 100px;"><pre>26</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="6" style="width: 50px;"><pre>6</pre></span><span class="table-cell" title="WLAN-528351" style="width: 150px;"><pre>WLAN-528351</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="24" style="width: 100px;"><pre>24</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="7" style="width: 50px;"><pre>7</pre></span><span class="table-cell" title="Vodafone-594A" style="width: 150px;"><pre>Vodafone-594A</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="8" style="width: 50px;"><pre>8</pre></span><span class="table-cell" title="WLAN-3EAH5X" style="width: 150px;"><pre>WLAN-3EAH5X</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="9" style="width: 50px;"><pre>9</pre></span><span class="table-cell" title="WLAN-FI-Zentral" style="width: 150px;"><pre>WLAN-FI-Zentral</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-enterprise" style="width: 125px;"><pre>WPA2-enterprise</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="10" style="width: 50px;"><pre>10</pre></span><span class="table-cell" title="G004-GAST" style="width: 150px;"><pre>G004-GAST</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="not-encrypted" style="width: 125px;"><pre>not-encrypted</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="11" style="width: 50px;"><pre>11</pre></span><span class="table-cell" title="Vodafone-guest" style="width: 150px;"><pre>Vodafone-guest</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="12" style="width: 50px;"><pre>12</pre></span><span class="table-cell" title="Gambler1" style="width: 150px;"><pre>Gambler1</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="13" style="width: 100px;"><pre>13</pre></span><span class="table-cell" title="20" style="width: 100px;"><pre>20</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="13" style="width: 50px;"><pre>13</pre></span><span class="table-cell" title="Vodafone Hotspot" style="width: 150px;"><pre>Vodafone Hotspot</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="not-encrypted" style="width: 125px;"><pre>not-encrypted</pre></span><span class="table-cell" title="6" style="width: 100px;"><pre>6</pre></span><span class="table-cell" title="16" style="width: 100px;"><pre>16</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="14" style="width: 50px;"><pre>14</pre></span><span class="table-cell" title="FRITZ!Box 7430 CN" style="width: 150px;"><pre>FRITZ!Box 7430 CN</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="16" style="width: 100px;"><pre>16</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="15" style="width: 50px;"><pre>15</pre></span><span class="table-cell" title="WLAN-HomeAY" style="width: 150px;"><pre>WLAN-HomeAY</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="11" style="width: 100px;"><pre>11</pre></span><span class="table-cell" title="16" style="width: 100px;"><pre>16</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="16" style="width: 50px;"><pre>16</pre></span><span class="table-cell" title="Vodafone Homespot" style="width: 150px;"><pre>Vodafone Homespot</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="not-encrypted" style="width: 125px;"><pre>not-encrypted</pre></span><span class="table-cell" title="6" style="width: 100px;"><pre>6</pre></span><span class="table-cell" title="12" style="width: 100px;"><pre>12</pre></span><span class="table-cell" title="150" style="width: 100px;"><pre>150</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="17" style="width: 50px;"><pre>17</pre></span><span class="table-cell" title="FRITZ!Box 7520 JH" style="width: 150px;"><pre>FRITZ!Box 7520 JH</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="11" style="width: 100px;"><pre>11</pre></span><span class="table-cell" title="12" style="width: 100px;"><pre>12</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="18" style="width: 50px;"><pre>18</pre></span><span class="table-cell" title="devolo-8dc" style="width: 150px;"><pre>devolo-8dc</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="1" style="width: 100px;"><pre>1</pre></span><span class="table-cell" title="12" style="width: 100px;"><pre>12</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-even"><span class="table-cell" title="19" style="width: 50px;"><pre>19</pre></span><span class="table-cell" title="Vodafone-D1BE" style="width: 150px;"><pre>Vodafone-D1BE</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="6" style="width: 100px;"><pre>6</pre></span><span class="table-cell" title="12" style="width: 100px;"><pre>12</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div><div class="table-row table-odd"><span class="table-cell" title="20" style="width: 50px;"><pre>20</pre></span><span class="table-cell" title="MagentaWLAN-XBRB" style="width: 150px;"><pre>MagentaWLAN-XBRB</pre></span><span class="table-cell" title="Manage" style="width: 100px;">Manage</span><span class="table-cell" title="WPA2-personal" style="width: 125px;"><pre>WPA2-personal</pre></span><span class="table-cell" title="6" style="width: 100px;"><pre>6</pre></span><span class="table-cell" title="8" style="width: 100px;"><pre>8</pre></span><span class="table-cell" title="54" style="width: 100px;"><pre>54</pre></span><span class="table-cell" title="Disconnected" style="width: 100px;"><pre>Disconnected</pre></span></div></div><div class="table-remain" style="display: none; height: 369px;"><span class="table-cell" style="width: 50px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 150px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 100px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 125px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 100px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 100px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 100px; height: 369px;">&nbsp;</span><span class="table-cell" style="width: 100px; height: 369px;">&nbsp;</span></div><div class="table-footer table-footer-nopage" align="right"></div></div></div>
+        <div class="item title">Wi-Fi</div>
+        <div class="item">
+            <span class="first">SSID</span>
+            <span><input type="text" class="text ng-pristine ng-valid" ng-model="oWifiParams.szSSID" input-valid="oParamsValid.oSSID" maxlength="32"></span>
+        </div>
+        <div class="item">
+            <span class="first ng-binding" ng-bind="oLan.networkMode">Network Mode</span>
+            <span ng-show="oCapbilities.oNetworkMode.bInfrastructure" class="">
+                <input type="radio" value="infrastructure" class="radio ng-pristine ng-valid" ng-model="oWifiParams.szNetworkMode" name="03K"><label>Manage</label>                
+            </span>
+            <span ng-show="oCapbilities.oNetworkMode.bAdhoc" class="margin-left10 ng-hide">
+                <input type="radio" value="adhoc" class="radio ng-pristine ng-valid" ng-model="oWifiParams.szNetworkMode" name="03L"><label>Ad-Hoc</label>
+            </span>
+        </div>
+        <div class="item">
+            <span class="first ng-binding" ng-bind="oLan.securityMode">Security Mode</span>
+            <span>
+                <select class="select ng-pristine ng-valid" ng-model="oWifiParams.szSecurityMode">
+                    <option value="disable" selected="selected">not-encrypted</option>
+                    <option value="WEP">WEP</option>
+                    <option value="WPA-personal">WPA-personal</option>
+                    <option value="WPA-enterprise">WPA-enterprise</option>
+                    <option value="WPA2-personal">WPA2-personal</option>
+                    <option value="WPA2-enterprise">WPA2-enterprise</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oCapbilities.bSupportWifiRegion">
+            <span class="first ng-binding" ng-bind="oLan.areaCountry">Area/Country</span>
+            <span>
+                <select class="select ng-pristine ng-valid" ng-model="oParams.szRegion" ng-options="o.value as o.name for o in oCapbilities.aRegionList"><option value="?" selected="selected"></option></select>
+            </span>
+        </div>
+        <div class="item" ng-show="oWifiParams.szSecurityMode==='WPA-personal' || oWifiParams.szSecurityMode==='WPA2-personal'">
+            <span class="first ng-binding" ng-bind="oLan.encryptionType">Encryption Type</span>
+            <span>
+                <select class="select ng-pristine ng-valid" ng-model="oParams.szEncryptionType">
+                    <option value="TKIP" selected="selected">TKIP</option>
+                    <option value="AES">AES</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first ng-binding" ng-bind="oLan.authentication">Authentication</span>
+            <span>
+                <input type="radio" value="open" class="radio ng-pristine ng-valid" ng-model="oParams.szAuthentication" name="03M">
+                <label ng-bind="oLan.openType" class="ng-binding" style="">Open</label>
+                <input type="radio" value="sharedkey" class="radio ng-pristine ng-valid" ng-model="oParams.szAuthentication" name="03N">
+                <label ng-bind="oLan.shareType" class="ng-binding" style="">Shared</label>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first ng-binding" ng-bind="oLan.keyLength">Key Length</span>
+            <span>
+                <input type="radio" value="64" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyLength" name="03O">64bit
+                <input type="radio" value="128" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyLength" name="03P">128bit
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first ng-binding" ng-bind="oLan.keyType">Key Type</span>
+            <span>
+                <input type="radio" value="HEX" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyType" name="03Q"><label ng-bind="oLan.hex" class="ng-binding" style="">HEX</label>
+                <input type="radio" value="ASC" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyType" name="03R">ASCII
+            </span>
+        </div>
+        <div class="item" ng-show="oWifiParams.szSecurityMode==='WEP' || oWifiParams.szSecurityMode==='WPA-personal' || oWifiParams.szSecurityMode==='WPA2-personal'">
+            <span class="first">
+                <label ng-bind="oLan.key" class="ng-binding" style="">Key</label>&nbsp;1
+                <input type="radio" value="1" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyChoose" name="03S" style="">
+            </span>
+            <span><input ng-disabled="oParams.szKeyChoose!=='1'" type="password" class="text ng-pristine ng-valid" ng-model="oParams.aKey[0]" input-valid="oParamsValid.oKey1" maxlength="64"></span>
+        </div>
+        <div ng-show="oWifiParams.szSecurityMode==='WPA-personal' || oWifiParams.szSecurityMode==='WPA2-personal'" class="psk">            
+            <span ng-bind="oLan.pskPassword" class="ng-binding" style="">8 to 63 ASCII characters or 8 to 64 hexadecimal characters</span>            
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first">
+                <label ng-bind="oLan.key" class="ng-binding" style="">Key</label>&nbsp;2
+                <input type="radio" value="2" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyChoose" name="03T" style="">
+            </span>
+            <span>
+                <input ng-disabled="oParams.szKeyChoose!=='2'" type="password" class="text ng-pristine ng-valid" ng-model="oParams.aKey[1]" input-valid="oParamsValid.oKey2" maxlength="63" disabled="disabled">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first">
+                 <label ng-bind="oLan.key" class="ng-binding" style="">Key</label>&nbsp;3
+                <input type="radio" value="3" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyChoose" name="03U" style="">
+            </span>
+            <span><input ng-disabled="oParams.szKeyChoose!=='3'" type="password" class="text ng-pristine ng-valid" ng-model="oParams.aKey[2]" input-valid="oParamsValid.oKey3" maxlength="63" disabled="disabled"></span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WEP'">
+            <span class="first">
+                <label ng-bind="oLan.key" class="ng-binding" style="">Key</label>&nbsp;4
+                <input type="radio" value="4" class="radio ng-pristine ng-valid" ng-model="oParams.szKeyChoose" name="03V" style="">
+            </span>
+            <span>
+                <input ng-disabled="oParams.szKeyChoose!=='4'" type="password" class="text ng-pristine ng-valid" ng-model="oParams.aKey[3]" input-valid="oParamsValid.oKey4" maxlength="63" disabled="disabled">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise'">
+            <span class="first ng-binding" ng-bind="oLan.authentication">Authentication</span>
+            <span>
+                <select class="select ng-pristine ng-valid" ng-model="oParams.szEnterpriseType">
+                    <option value="EAP-TLS" selected="selected">EAP-TLS</option>
+                    <option value="EAP-PEAP">EAP-PEAP</option>
+                    <option value="EAP-TTLS">EAP-TTLS</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType!=='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.username">User Name</span>
+            <span>
+                <input type="text" class="text ng-pristine ng-valid" ng-model="oParams.szUsername" input-valid="oParamsValid.oUserName" maxlength="32">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType!=='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.password">Password</span>
+            <span>
+                <input type="password" class="text ng-pristine ng-valid" ng-model="oParams.szPassword" input-valid="oParamsValid.oPassword" maxlength="32">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-PEAP'">
+            <span class="first ng-binding" ng-bind="oLan.peapVersion">PEAP version</span>
+            <span>
+                <select class="text ng-pristine ng-valid" ng-model="oParams.szPEAPVersion">
+                    <option value="0" selected="selected">0</option>
+                    <option value="1">1</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-PEAP'">
+            <span class="first ng-binding" ng-bind="oLan.peapLabel">PEAP label</span>
+            <span>
+                <select class="text ng-pristine ng-valid" ng-model="oParams.szPEAPLabel">
+                    <option value="old" selected="selected">old</option>
+                    <option value="new">new</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-PEAP'">
+            <span class="first ng-binding" ng-bind="oLan.innerAuthentication">Inner authentication</span>
+            <span>
+                <select class="text ng-pristine ng-valid" ng-model="oParams.szInnerAuthentication">
+                    <option value="EAP-GTC" selected="selected">GTC</option>
+                    <option value="EAP-MD5">MD5</option>
+                    <option value="MS-CHAPv2">MSCHAPv2</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-TTLS'">
+            <span class="first ng-binding" ng-bind="oLan.innerAuthentication">Inner authentication</span>
+            <span>
+                <select class="text ng-pristine ng-valid" ng-model="oParams.szInnerAuthenticationMode">
+                    <option value="PAP" selected="selected">PAP</option>
+                    <option value="MS-CHAPv2">MSCHAPv2</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType!=='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.anonymousIdentity">Anonymous identity</span>
+            <span>
+                <input type="text" class="text ng-pristine ng-valid" ng-model="oParams.szAnonymousIdentity" input-valid="oParamsValid.oAnonymousIdentity" maxlength="32">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.identity">Identify</span>
+            <span>
+                <input type="text" class="text ng-pristine ng-valid" ng-model="oParams.szIdentity" input-valid="oParamsValid.oIdentity" maxlength="32">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.privateKeyPassword">Private Key Password</span>
+            <span>
+                <input type="password" class="text ng-pristine ng-valid" ng-model="oParams.szPrivateKeyPassword" input-valid="oParamsValid.oPrivateKeyPassword" maxlength="32">
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise'">
+            <span class="first ng-binding" ng-bind="oLan.eapolVersion">EAPOL Version</span>
+            <span>
+                <select class="select ng-pristine ng-valid" ng-model="oParams.szEAPOLVersion">
+                    <option value="1" selected="selected">1</option>
+                    <option value="2">2</option>
+                </select>
+            </span>
+        </div>
+        <div class="item ng-hide" ng-show="oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise'">
+            <span class="first ng-binding" ng-bind="oLan.caCertificate">CA Certificate</span>
+            <span><input type="text" readonly="readonly" class="text ng-pristine ng-valid" ng-model="oParams.szCACerPath"></span>&nbsp;
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.browse" ng-click="browseFilePath(0)" title="Browse">Browse</button>
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.upload" ng-click="uploadCertificate(0)" title="Upload">Upload</button>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.userCertificate">User Certificate</span>
+            <span><input type="text" readonly="readonly" class="text ng-pristine ng-valid" ng-model="oParams.szUserCerPath"></span>&nbsp;
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.browse" ng-click="browseFilePath(1)" title="Browse">Browse</button>
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.upload" ng-click="uploadCertificate(1)" title="Upload">Upload</button>
+        </div>
+        <div class="item ng-hide" ng-show="(oWifiParams.szSecurityMode==='WPA-enterprise' || oWifiParams.szSecurityMode==='WPA2-enterprise') &amp;&amp; oParams.szEnterpriseType==='EAP-TLS'">
+            <span class="first ng-binding" ng-bind="oLan.privateKeyCertificate">Private Key</span>
+            <span><input type="text" readonly="readonly" class="text ng-pristine ng-valid" ng-model="oParams.szPrivateKeyCerPath"></span>&nbsp;
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.browse" ng-click="browseFilePath(2)" title="Browse">Browse</button>
+            <button type="button" class="btn btn-control ng-binding ellipsis" ng-bind="oLan.upload" ng-click="uploadCertificate(2)" title="Upload">Upload</button>
+        </div>
+        <div ng-show="oCapbilities.bSupportWPS" class="ng-hide">
+            <div class="item title">WPS</div>
+            <div class="item">
+                <input type="checkbox" class="checkbox ng-pristine ng-valid" ng-model="oParams.bEnableWps" style="">
+                <label ng-bind="oLan.enableWPS" class="ng-binding" style="">Enable WPS</label>
+            </div>
+            <div class="item">
+                <span class="first ng-binding" ng-bind="oLan.pinCode">PIN Code</span>
+                <span>
+                    <input ng-disabled="!oParams.bEnableWps" type="text" class="text ng-pristine ng-valid" readonly="true" ng-model="oParams.szPinCode" disabled="disabled">
+                    <input ng-disabled="!oParams.bEnableWps" type="button" class="btn" ng-value="oLan.generate" ng-click="generatePinCode()" value="Generate" disabled="disabled">
+                </span>
+            </div>
+            <div class="item">
+                <span class="first">
+                    <input ng-disabled="!oParams.bEnableWps" type="radio" class="radio ng-pristine ng-valid" value="0" ng-model="oParams.szConnectMode" name="03W" disabled="disabled" style="">
+                    <label ng-bind="oLan.pbcConnect" class="ng-binding" style="">PBC connection</label>
+                </span>
+                <span>
+                    <input ng-disabled="!oParams.bEnableWps || oParams.szConnectMode === '1'" type="button" class="btn" ng-value="oLan.connect" ng-click="autoConnect()" value="Connect" disabled="disabled">
+                </span>
+            </div>
+            <div class="item">
+                <span class="first">
+                    <input ng-disabled="!oParams.bEnableWps" type="radio" class="radio ng-pristine ng-valid" value="1" ng-model="oParams.szConnectMode" name="03X" disabled="disabled" style="">
+                    <label ng-bind="oLan.manualConnect" class="ng-binding" style="">Use router PIN code</label>
+                </span>
+                <span>
+                   <input ng-disabled="!oParams.bEnableWps || oParams.szConnectMode === '0'" type="button" class="btn" ng-value="oLan.connect" ng-click="manualConnect()" value="Connect" disabled="disabled">
+                </span>
+            </div>
+            <div class="item">
+                <span class="first">SSID</span>
+                <span>
+                    <input ng-disabled="!oParams.bEnableWps || oParams.szConnectMode === '0'" type="text" class="text ng-pristine ng-valid" ng-model="oWifiParams.szWPSSSID" disabled="disabled">
+                </span>
+            </div>
+            <div class="item">
+                <span class="first ng-binding" ng-bind="oLan.apPinCode">Router PIN code</span>
+                <span>
+                    <input ng-disabled="!oParams.bEnableWps || oParams.szConnectMode === '0'" type="text" class="text ng-pristine ng-valid" ng-model="oParams.szApPinCode" input-valid="oParamsValid.oApPinCode" maxlength="8" disabled="disabled">
+                </span>
+            </div>
+        </div>
+    </div>
+	<button class="btn btn-primary btn-save" type="button" ng-click="save()">
+        <span class="img">&nbsp;</span>
+        <span ng-bind="oLan.save" class="ng-binding" style="">Save</span>
+    </button>
+    <div id="main_plugin" class="main-plugin"></div>
+</div></div><div id="ui-tabs-23" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-23" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-24" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-24" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-25" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-25" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-26" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-26" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div>
+</div></div>
+		</div>
+		<div class="layout-south-inner ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; inset: auto 0px 0px; width: auto; z-index: 0; height: 30px; display: block; visibility: visible;">
+			<div class="footer" id="footer">©2020 Hikvision Digital Technology Co., Ltd. All Rights Reserved.</div>
+		</div>
+	<div id="" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; bottom: 30px; cursor: default; display: none;"><div id="" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible;"></div></div></div>
+
+<script id="seajsnode" src="index-Dateien/sea.min.js.Download"></script>
+<script>
+	document.write("<script src='../script/lib/seajs/config/sea-config.js?version=" + new Date().getTime() + "' ></scr" + "ipt>");
+	document.write("<script src='../script/lib/jquery/My97DatePicker/WdatePicker.js?version=" + new Date().getTime() + "' ></scr" + "ipt>");
+</script><script src="index-Dateien/sea-config.js"></script><script src="index-Dateien/WdatePicker.js"></script><script src="index-Dateien/sea-config.js.Download"></script><script src="index-Dateien/WdatePicker.js.Download"></script>
+<script for="main_plugin_multiVideoActiveX" event="GetSelectWndInfo(SelectWndInfo)">
+	try {
+		GetSelectWndInfo(SelectWndInfo);
+	} catch (e) {
+		// todo something
+	}
+</script>
+<script for="main_plugin_multiVideoActiveX" event="PluginEventHandler(iEventType, iParam1, iParam2)">
+	try {
+		PluginEventHandler(iEventType, iParam1, iParam2);
+	} catch (e) {
+		// todo something
+	}
+</script>
+<script for="main_plugin_multiVideoActiveX" event="MouseEvent(szXml)">
+	try {
+		MouseEvent(szXml);
+	} catch (e) {
+		// todo something
+	}
+</script>
+<script for="main_plugin_multiVideoActiveX" event="ZoomInfoCallback(szZoomInfo)">
+	try {
+		ZoomInfoCallback(szZoomInfo);
+	} catch (e) {
+		// todo something
+	}
+</script>
+<div id="" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; top: 40px; cursor: default; display: none;"><div id="" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible;"></div></div><div id="" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; left: 214px; cursor: default; display: none;"><div id="" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible;"></div></div><div style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 200px; height: 223px;" src="index-Dateien/My97DatePicker.htm" frameborder="0" border="0" scrolling="no" tabindex="-1"></iframe></div><div style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width:1px;height:1px;" src="file:///F:/script/lib/jquery/My97DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no" tabindex="-1"></iframe></div></body></html>
